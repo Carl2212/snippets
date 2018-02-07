@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>fdkeychain</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>GET KeyChain : {{keychain}}</ion-label>
+      <button ion-button item-right (click)="getKeyChain()">GET</button>
+    </ion-item>
+    <ion-item>
+      <ion-label item-left>SET KeyChain</ion-label>
+      <ion-input [(ngModel)]="newkeychain"></ion-input>
+      <button ion-button item-right (click)="setKeyChain()">SET</button>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{message}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
