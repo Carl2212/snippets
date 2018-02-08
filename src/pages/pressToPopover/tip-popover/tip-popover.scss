@@ -1,0 +1,36 @@
+tipPopover{
+  position: absolute;
+  display : none;
+  .tip-arrow{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 20px;
+    height: 10px;
+    margin : 0 auto;
+    &:after{
+      left: 3px;
+      top: -6px;
+      border-radius: 3px;
+      position: absolute;
+      z-index: 10;
+      width: 14px;
+      height: 14px;
+      background-color: #fff;
+      content: "";
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+  .tip-viewport{
+    position: relative;
+    border-radius: 10px;
+    width: auto;
+    padding : 1em;
+    min-width: 0;
+    min-height: 0;
+    max-height: 90%;
+    color: #000;
+    background: #fff;
+  }
+}
