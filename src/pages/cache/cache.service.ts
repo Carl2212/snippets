@@ -1,88 +1,60 @@
-import {Injectable, EventEmitter} from "@angular/core";
-import {Storage} from "@ionic/storage";
-import {deepEqual} from "ionic-angular/util/util";
+import { Injectable, EventEmitter } from "@angular/core";
+import { Storage } from "@ionic/storage";
+import { deepCopy, deepEqual } from "ionic-angular/es2015/util/util";
 /**
- * CACHE SERVICE
- * cache the tree-node data of the user's action
  * Created by Ellen on 30/1/2018.
  */
 const CACHENAME: string = 'cache';
 
-export class Node {
-
-  private _nd: any;
-  public emitEvent = new EventEmitter<any>();
-
-  constructor(
-    private callback,
-    private relateNode: Array<string>
-  ) {}
-
-  get nd() {
-    return this._nd;
-  }
-
-  set nd(val: any) {
-    this._nd = val;
-    this.callback && this.callback(this.relateNode);
-    this.emitEvent.emit(val);
-  }
-
-  setNd(val: any) {
-    this._nd = val;
-  }
-
+export interface Node {
+  key? : any;
+  value? : any;
+  next? : Node;
 }
 
 export abstract class CacheBasic {
 
   private cacheNode: Array<any> = [];
 
-  private cacheNum: number = 40;
+  private cacheNum: number = 100;
 
-  constructor(private storage: Storage,
-              private nodeName: Array<string>) {
+  abstract latestCache: Node;
+
+  constructor(private storage: Storage) {
   }
 
-  setCache(cacheName?: Array<string>) {
-    if (this.cacheNode.length <= 0) {
-      return;
-    }
-    if (cacheName) {
-      let latest = this.cacheNode[0];
-      latest[cacheName[0]] = this[cacheName[0]].nd;
-    }
+  private setCache() {
     this.storage.set(CACHENAME, this.cacheNode);
-    this.loadCache();
   }
 
-  loadCache() {
+  public loadCache() {
     if (this.cacheNode.length <= 0) {
-      return;
+      this.latestCache = null;
+    }else{
+      this.latestCache = deepCopy(this.cacheNode[0]);
     }
-    let latest = this.cacheNode[0];
-    this.nodeName.forEach((v) => {
-      if (latest[v]) {
-        this[v].setNd(latest[v]);
-      } else {
-        this[v].setNd(null);
-      }
-    });
   }
 
-  getTargetCache(relateNode) {
+  private nodeSearch(node : Node , target : Node) : boolean {
+    if(node.key == target.key && deepEqual(node.value,target.value)) {
+      if(!node.next) {
+        return true;
+      }
+      if(!target.next) {
+        return false;
+      }
+      return this.nodeSearch(node.next , target.next);
+    }
+    return false;
+  }
+
+  public getTargetCache() {
     let res;
     if (this.cacheNode.length <= 0) {
       res = -1;
     } else {
       res = this.cacheNode.findIndex((v) => {
-        let isTrue = true;
-        relateNode.forEach((nodeName) => {
-          if (!v[nodeName] || !deepEqual(v[nodeName], this[nodeName].nd)) {
-            isTrue = false;
-          }
-        });
-        return isTrue;
+        return this.nodeSearch(this.latestCache , v);
       });
     }
     let latest = {};
@@ -90,24 +62,24 @@ export abstract class CacheBasic {
       latest = this.cacheNode[res];
       this.cacheNode.splice(res, 1);
     } else {
-      relateNode.forEach((nodeName) => {
-        latest[nodeName] = this[nodeName].nd;
-      });
+      latest= this.latestCache;
       if (this.cacheNode.length > this.cacheNum) {
         this.cacheNode.splice(this.cacheNum - 1);
       }
     }
     this.cacheNode.unshift(latest);
     this.setCache();
-    //通知事件
-
+    this.loadCache();
   }
 
-  reload(): Promise<any> {
+  public reload(): Promise<any> {
     return this.storage.get(CACHENAME)
       .then((data) => {
         if (data) {
           this.cacheNode = data;
+          if(!this.cacheNode[0].value) {
+            this.cacheNode = [];
+          }
           this.loadCache();
         }
       });
@@ -117,21 +89,68 @@ export abstract class CacheBasic {
 @Injectable()
 export class CacheService extends CacheBasic {
 
-  public D1: Node;
-  public D2: Node;
-  public D3: Node;
-  public D4: Node;
+  //latest cache
+  public latestCache : Node;
+  //related node
+  private node : Array<string> = ['actionA', 'actionB', 'actionC', 'actionD'];
 
-  constructor(storage: Storage) {
-    super(storage, ['D1', 'D2', 'D3', 'D4']);
-    //对需要缓存的数据 做节点初始化 绑定缓存数据函数 以及相关函数参数(关联的节点名)
-    this.D1 = new Node(this.getTargetCache.bind(this), ['D1']);
-    this.D2 = new Node(this.getTargetCache.bind(this), ['D1', 'D2']);
-    this.D3 = new Node(this.getTargetCache.bind(this), ['D1', 'D2', 'D3']);
-    this.D4 = new Node(this.setCache.bind(this), ['D4']);
+  public cacheEvent = new EventEmitter<any>();
+
+  constructor(
+    storage: Storage
+  ) {
+    super(storage);
+    //node init
+    this.node.forEach((v)=>{
+      this.new(v);
+    });
   }
 
-  setCache(cacheName?: Array<string>) {
-    super.setCache(cacheName);
+  public loadCache() {
+    super.loadCache();
+    this.initNode();
+  }
+
+  private initNode() {
+    let node = this.latestCache;
+    this.node.forEach(v=>{
+      if(node && node.key == v) {
+        this[`_${v}`] = node.value;
+      }else{
+        this[`_${v}`] = null;
+      }
+      node = node ? node.next : null;
+    })
+  }
+
+  private new(property : string) {
+    this[`_${property}`] = null;
+    Object.defineProperty(this,property,{
+      get : ()=>{
+        return this[`_${property}`];
+      },
+      set: (value : any)=>{
+        console.log(value);
+        this[`_${property}`] = value;
+        let end = this.node.indexOf(property);
+        let i = 0;
+        let node: Node= this.latestCache= {};
+        while(node){
+          node.key = this.node[i];
+          node.value = this[`_${this.node[i]}`];
+          if(i < end) {
+            node.next = {};
+          }else{
+            node.next = null;
+          }
+          node= node.next;
+          i++;
+        }
+        this.getTargetCache();
+        this.cacheEvent.emit(property);
+      },
+      enumerable: true,
+      configurable: true
+    })
   }
 }

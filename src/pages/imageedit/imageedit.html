@@ -1,13 +1,20 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Image Edit
-    </ion-title>
+    <ion-title>Canvas Image Edit</ion-title>
+    <ion-buttons end>
+      <button ion-button item-right clear icon-only (click)="listenEdit()">
+        <ion-icon [name]="isEdit? 'open-outline' : 'create-outline'"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding >
+<ion-content>
   <div #imgParent class="imgParent" fixed>
-    <img #img src="assets/imgs/demo.jpg">
+    <img #img [src]="imageUrl">
+    <canvas-comp #cs *ngIf="isEdit" [iHeight]="iHeight" [iWidth]="iWidth" [imageUrl]="imageUrl"></canvas-comp>
   </div>
+  <ion-footer *ngIf="isEdit">
+    <tools></tools>
+  </ion-footer>
 </ion-content>

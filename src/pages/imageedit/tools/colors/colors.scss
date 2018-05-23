@@ -1,0 +1,11 @@
+colors{
+  .color-palette{
+    ion-col{
+      min-height: 5px;
+    }
+    ion-icon:before{
+      text-shadow: 2px 0 color($colors,dark);
+      font-size:1.5em;
+    }
+  }
+}

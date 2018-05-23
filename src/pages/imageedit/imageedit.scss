@@ -4,12 +4,24 @@ image-edit{
     overflow: hidden;
     width : 100%;
     height : 100%;
-    img{
+    &>img{
       width: 100%;
+      height : auto;
       position: absolute;
-      //top : 50%;
-      //left : 50%;
-      //transform: translate(-50% , -50%);
+    }
+    canvas-comp{
+      position: absolute;
+      width: 100%;
+      z-index: 99;
     }
   }
+  .ischose{
+    border : 1px solid #fff;
+    box-shadow: 0 0 2px 2px #2d2d2d;
+  }
+  .fab[small] {
+    height : 30px;
+    width : 30px;
+  }
+
 }

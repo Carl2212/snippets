@@ -1,0 +1,32 @@
+<div class="main-tools">
+  <ion-row>
+    <ion-col no-padding *ngFor="let l of actions">
+      <button ion-button full (click)="tool.action=l.action" no-margin>
+        <ion-icon [name]="l.icon"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</div>
+<div class="assistant-tools" *ngIf="tool.action == 'square' || tool.action == 'font' || tool.action == 'draw'">
+  <line-width *ngIf="tool.action == 'draw'"></line-width>
+  <colors *ngIf="tool.action == 'square' || tool.action == 'font' || tool.action == 'draw'"></colors>
+  <squares *ngIf="tool.action == 'square'"></squares>
+  <ion-row>
+    <ion-col no-padding>
+      <button ion-button color="light" icon-only (click)="tool.action=null" no-margin>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col no-padding col-auto>
+      <ion-label>
+        <ion-icon [name]="getAction(tool.action) ? getAction(tool.action).icon : null"></ion-icon>
+        {{getAction(tool.action) ? getAction(tool.action).name : null}}
+      </ion-label>
+    </ion-col>
+    <ion-col no-padding text-right>
+      <button ion-button color="light" icon-only (click)="tool.action=null" no-margin>
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</div>

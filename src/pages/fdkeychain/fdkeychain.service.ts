@@ -17,7 +17,7 @@ import { Cordova, Plugin,IonicNativePlugin} from "@ionic-native/core";
   plugin : 'cordova-plugin-fdkeychain',
   pluginRef : 'cordova.plugins.FDKeychain',
   repo : 'https://github.com/ionic-team/cordova-plugin-fdkeychain',
-  platform : ['iOS']
+  platforms : ['iOS']
 })
 
 @Injectable()

@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import {CoreModule} from "../core/core.module";
+import { IonicStorageModule } from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -16,7 +16,11 @@ import {CoreModule} from "../core/core.module";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    CoreModule
+    IonicStorageModule.forRoot({
+      name : 'snippets',
+      storeName: 'snippetsStorage',
+      driverOrder: ['localstorage', 'indexeddb']
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

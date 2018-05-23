@@ -5,7 +5,6 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>cache</ion-title>
   </ion-navbar>
@@ -14,19 +13,27 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-label item-left>D1</ion-label>
-    <ion-input [(ngModel)]="cache.D1.nd"></ion-input>
+    <ion-label item-left>Action A</ion-label>
+    <ion-select interface="popover" [(ngModel)]="cache['actionA']" placeholder="select actionA">
+      <ion-option *ngFor="let l of actionA;let i=index" [value]="i">{{l}}</ion-option>
+    </ion-select>
   </ion-item>
-  <ion-item *ngIf="cache.D1.nd" >
-    <ion-label item-left>D2</ion-label>
-    <ion-input [(ngModel)]="cache.D2.nd"></ion-input>
+  <ion-item *ngIf="cache['actionA']!== null && cache['actionA'] > -1" >
+    <ion-label item-left>Action B</ion-label>
+    <ion-select interface="popover" [(ngModel)]="cache['actionB']" placeholder="select actionB">
+      <ion-option *ngFor="let l of actionB;let i=index" [value]="i">{{l}}</ion-option>
+    </ion-select>
   </ion-item>
-  <ion-item *ngIf="cache.D2.nd" >
-    <ion-label item-left>D3</ion-label>
-    <ion-input [(ngModel)]="cache.D3.nd"></ion-input>
+  <ion-item *ngIf="cache['actionB']!== null && cache['actionB'] > -1" >
+    <ion-label item-left>Action C</ion-label>
+    <ion-select interface="popover" [(ngModel)]="cache['actionC']" placeholder="select actionC">
+      <ion-option *ngFor="let l of actionC;let i=index" [value]="i">{{l}}</ion-option>
+    </ion-select>
   </ion-item>
-  <ion-item  *ngIf="cache.D3.nd" >
-    <ion-label item-left>D4</ion-label>
-    <ion-input [(ngModel)]="cache.D4.nd"></ion-input>
+  <ion-item  *ngIf="cache['actionC']!== null && cache['actionC'] > -1" >
+    <ion-label item-left>Action D</ion-label>
+    <ion-select interface="popover" [(ngModel)]="cache['actionD']" placeholder="select actionD">
+      <ion-option *ngFor="let l of actionD;let i=index" [value]="i">{{l}}</ion-option>
+    </ion-select>
   </ion-item>
 </ion-content>

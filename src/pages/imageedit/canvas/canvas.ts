@@ -1,5 +1,6 @@
 import { Component, ViewChild, Renderer2, Input, ViewChildren, QueryList } from '@angular/core';
 import { NavController, Gesture } from 'ionic-angular';
+import { ToolsService } from "../tools/tools.service";
 
 @Component({
   selector: 'canvas-comp',
@@ -13,7 +14,6 @@ export class Canvas {
   cs : any;
 
   private _iHeight : number;
-  @Input() color : string;
   @Input() imageUrl : string;
   @Input() iWidth : number;
   @Input()
@@ -28,13 +28,13 @@ export class Canvas {
   }
   constructor(
     public navCtrl: NavController,
-    private render : Renderer2
+    private render : Renderer2,
+    private tool: ToolsService
   ) {
   }
   initCanvas() {
     let devicePixelRatio = window.devicePixelRatio || 1;
     this.cs = this.canvas.nativeElement.getContext('2d');
-    console.log(this.iHeight , this.iWidth);
     this.render.setStyle(this.canvas.nativeElement,'width',`${this.iWidth}px`);
     this.render.setStyle(this.canvas.nativeElement,'height',`${this.iHeight}px`);
     this.canvas.nativeElement.height = this.iHeight * devicePixelRatio;
@@ -43,33 +43,65 @@ export class Canvas {
     let image = new Image();
     image.onload = ()=>{
       this.cs.drawImage(image,0,0,this.iWidth,this.iHeight);
-      this.gesture = new Gesture(this.canvas.nativeElement);
-      this.gesture.listen();
-      this.gesture.on('panstart' , e=>{
-        let x =  this.getOffset(e);
-        let y =  this.getOffset(e,false);
-        this.cs.strokeStyle= this.color;
+      this.gestureEvent();
+    }
+    image.src = this.imageUrl;
+  }
+
+  gestureEvent() {
+    this.gesture = new Gesture(this.canvas.nativeElement);
+    this.gesture.listen();
+    this.gesture.on('panstart' , e=>{
+      let x =  this.getOffset(e);
+      let y =  this.getOffset(e,false);
+      this[this.tool.action](x,y,e.type);
+    });
+    this.gesture.on('pan' , e=>{
+      let x = this.getOffset(e);
+      let y = this.getOffset(e,false);
+      this[this.tool.action](x,y,e.type);
+    });
+    this.gesture.on('panend' , e=>{
+      let x = this.getOffset(e);
+      let y = this.getOffset(e,false);
+      this[this.tool.action](x,y,e.type);
+    });
+  }
+
+  draw(x,y,event) {
+    switch (event){
+      case 'panstart':
+        this.cs.strokeStyle= this.tool.color;
+        this.cs.lineWidth = this.tool.lineWidth;
         this.cs.beginPath();
         this.cs.moveTo(x , y);
         this.cs.lineTo(x , y);
         this.cs.stroke();
-      });
-      this.gesture.on('pan' , e=>{
-        let x = this.getOffset(e);
-        let y = this.getOffset(e,false);
+        break;
+      case 'pan':
         this.cs.lineTo(x , y);
         this.cs.stroke();
-      });
-      this.gesture.on('panend' , e=>{
-        let x = this.getOffset(e);
-        let y = this.getOffset(e,false);
+        break;
+      case 'panend':
         this.cs.lineTo(x , y);
         this.cs.stroke();
         this.cs.closePath();
-      });
+        break;
+      default:
+        console.log(event);
+        break;
     }
-    image.src = this.imageUrl;
   }
+  cut() {
+
+  }
+  font() {
+
+  }
+  square() {
+
+  }
+
 
   getOffset(event : any , isX : boolean = true) {
     if(event.srcEvent.offsetX) {
