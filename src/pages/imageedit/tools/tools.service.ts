@@ -7,16 +7,26 @@ import { Injectable } from "@angular/core";
 export class ToolsService {
 
   lineWidth : number;
+  font: number;
   color: string;
-  square: string;
-  squareFill: boolean;
+  figure: string;
+  figureFill: boolean;
   action:string;
+  text: string;
 
+  boxLeft: number;
+  boxTop:number;
+  boxHeight : number;
+  boxWidth : number;
   constructor() {
 
   }
 
-  init() {
-
+  reset() {
+    this.lineWidth= 2;
+    this.font= 15;
+    this.color = '#000';
+    this.figure = 'square';
+    this.figureFill = false;
   }
 }

@@ -8,9 +8,18 @@
   </ion-row>
 </div>
 <div class="assistant-tools" *ngIf="tool.action == 'square' || tool.action == 'font' || tool.action == 'draw'">
-  <line-width *ngIf="tool.action == 'draw'"></line-width>
-  <colors *ngIf="tool.action == 'square' || tool.action == 'font' || tool.action == 'draw'"></colors>
-  <squares *ngIf="tool.action == 'square'"></squares>
+  <div *ngIf="tool.action == 'draw'">
+    <line-width [property]="'lineWidth'" [min]="1" [max]="20"></line-width>
+    <colors></colors>
+  </div>
+  <div *ngIf="tool.action == 'square'">
+    <colors></colors>
+    <squares></squares>
+  </div>
+  <div *ngIf="tool.action == 'font'">
+    <line-width [property]="'font'" [min]="15" [max]="72"></line-width>
+    <colors></colors>
+  </div>
   <ion-row>
     <ion-col no-padding>
       <button ion-button color="light" icon-only (click)="tool.action=null" no-margin>

@@ -4,9 +4,10 @@ import {ImageEdit} from "./imageedit";
 import {Canvas} from "./canvas/canvas";
 import { Tools } from "./tools/tools";
 import { Colors } from "./tools/colors/colors";
-import { Squares } from "./tools/square/square";
-import { LineWidth } from "./tools/lineWidth/lineWidth";
+import { Figure } from "./tools/figure/figure";
+import { Range } from "./tools/range/range";
 import { ToolsService } from "./tools/tools.service";
+import { DragBox } from "./dragbox/dragbox";
 
 @NgModule({
   declarations: [
@@ -14,8 +15,9 @@ import { ToolsService } from "./tools/tools.service";
     Canvas,
     Tools,
     Colors,
-    Squares,
-    LineWidth
+    Figure,
+    Range,
+    DragBox
   ],
   imports: [
     IonicPageModule.forChild(ImageEdit),

@@ -1,5 +1,6 @@
 import { Component, ViewChild, Renderer2 } from '@angular/core';
 import { Gesture, IonicPage } from 'ionic-angular';
+import { ToolsService } from "./tools/tools.service";
 
 @IonicPage()
 @Component({
@@ -32,7 +33,8 @@ export class ImageEdit {
   isEdit : boolean = false;
 
   constructor(
-    private render : Renderer2
+    private render : Renderer2,
+    public tool : ToolsService
   ) {
 
   }

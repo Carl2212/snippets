@@ -1,0 +1,38 @@
+dragbox{
+  .drag-box{
+    position: absolute;
+    z-index:100;
+    top:0;
+    left:0;
+    transform: translate(30px,30px);
+    border : 2px solid color($colors,dark);
+    textarea{
+      background: transparent;
+      border: none;
+    }
+    .point{
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      border: 1px color($colors,white);
+      background: color($colors,primary);
+      position: absolute;
+      &.left{
+        left:-4px;
+        top:calc(50% - 3px);
+      }
+      &.right{
+        right:-4px;
+        top:calc(50% - 3px);
+      }
+      &.top{
+        left:calc(50% - 3px);
+        top:-4px;
+      }
+      &.bottom{
+        left:calc(50% - 3px);
+        bottom:-4px;
+      }
+    }
+  }
+}

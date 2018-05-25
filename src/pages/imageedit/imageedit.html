@@ -11,8 +11,9 @@
 
 <ion-content>
   <div #imgParent class="imgParent" fixed>
-    <img #img [src]="imageUrl">
-    <canvas-comp #cs *ngIf="isEdit" [iHeight]="iHeight" [iWidth]="iWidth" [imageUrl]="imageUrl"></canvas-comp>
+    <img #img [src]="imageUrl" *ngIf="!isEdit">
+    <canvas-comp #cs *ngIf="isEdit" [iHeight]="iHeight" [iWidth]="iWidth" [imageUrl]="imageUrl">
+    </canvas-comp>
   </div>
   <ion-footer *ngIf="isEdit">
     <tools></tools>
