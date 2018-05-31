@@ -2,13 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, NavController, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { TabsPage } from "../pages/tabs/tabs";
 
-import { HomePage } from '../pages/home/home';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = TabsPage;
   @ViewChild('content') content : NavController;
   @ViewChild('menu') menu : MenuController
 

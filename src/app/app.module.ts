@@ -7,11 +7,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { IonicStorageModule } from "@ionic/storage";
+import { TabsPage } from "../pages/tabs/tabs";
+import { FigureDemo } from "../pages/figure/figure";
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    TabsPage,
+    FigureDemo
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,9 @@ import { IonicStorageModule } from "@ionic/storage";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    TabsPage,
+    FigureDemo
   ],
   providers: [
     StatusBar,

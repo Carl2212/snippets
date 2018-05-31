@@ -1,0 +1,55 @@
+$figure-color : color($colors , primary);
+$border-color : color($colors , dark);
+figure-demo {
+  .figure{
+    margin: 20px;
+  }
+  .diamond{
+    position: relative;
+    width: 70px;
+    border-style: solid;
+    border-color: transparent transparent $figure-color transparent;
+    border-width: 0 15px 20px 15px;
+    filter: drop-shadow(0 0 10px $figure-color);
+    margin-bottom: 60px;
+    &:after{
+      position: absolute;
+      top: 20px;
+      left:-15px;
+      border-style: solid;
+      border-color: $figure-color transparent transparent transparent;
+      border-width: 50px 35px 0 35px;
+      content: "";
+    }
+  }
+  .dailog-box{
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    background: $figure-color;
+    filter: drop-shadow(0 0 10px $figure-color);
+    position: relative;
+    &:after{
+      position: absolute;
+      content: " ";
+      border-style: solid;
+      border-color: $figure-color transparent transparent transparent;
+      border-width: 20px 10px 0 10px;
+      left: -20px;
+      top: calc(50% - 10px);
+      transform: rotate(90deg);
+    }
+  }
+  .shade-box{
+    position: relative;
+    &:after{
+      content:" ";
+      position: absolute;
+      left:-10%;
+      top:-10%;
+      width: 120%;
+      height:120%;
+      box-shadow: 1000px 1000px 0 0 rgba(55,55,55,.5) ,-1000px -1000px 0 0 rgba(55,55,55,.5) ;
+    }
+  }
+}
