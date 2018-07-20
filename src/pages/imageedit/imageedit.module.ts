@@ -8,6 +8,10 @@ import { Figure } from "./tools/figure/figure";
 import { Range } from "./tools/range/range";
 import { ToolsService } from "./tools/tools.service";
 import { DragBox } from "./dragbox/dragbox";
+import { scrawl } from "./scrawl/scrawl";
+import { FigureComp } from "./figure/figure";
+import { DrawService } from "./canvas/drawService";
+import { Crop } from "./tools/crop/crop";
 
 @NgModule({
   declarations: [
@@ -17,14 +21,16 @@ import { DragBox } from "./dragbox/dragbox";
     Colors,
     Figure,
     Range,
-    DragBox
+    DragBox,
+    scrawl,
+    FigureComp,
+    Crop
   ],
   imports: [
     IonicPageModule.forChild(ImageEdit),
   ],
   providers : [
-    ImageEdit,
-    Canvas,
+    DrawService,
     ToolsService
   ]
 })

@@ -8,19 +8,19 @@ import { figureList, FigureStruct } from "../../config/figure.list";
     <ion-row>
     <ion-col no-padding>
         <button ion-button no-margin clear full icon-only (click)="fill()">
-          <ion-icon color="dark" name="radio-button-on"></ion-icon>
+          <ion-icon color="dark" name="color-fill"></ion-icon>
         </button>
       </ion-col>
       <ion-col no-padding *ngFor="let l of figureList">
-        <button ion-button no-margin clear full [class.outline]="tool.figure == l.name"  icon-only (click)="choose(l)">
-          <ion-icon color="dark" [name]="tool.figure == l.name && tool.figureFill  ? l?.icon.slice(0,-8) : l?.icon"></ion-icon>
+        <button ion-button no-margin clear full [class.outline]="tool.figure == l.idx"  icon-only (click)="choose(l)">
+          <ion-icon color="dark" [name]="l?.icon"></ion-icon>
         </button>
       </ion-col>
     </ion-row>
   `,
   styles:[`
    button[clear].outline{
-    box-shadow: inset 0 -3px 0 #488aff;
+    box-shadow: inset 0 -3px 0 #53C0F0;
     border-radius: 0;
    }
    `]
@@ -32,14 +32,8 @@ export class Figure {
   constructor(
     private tool: ToolsService
   ){}
-
-  getSquare(name : string) {
-    return figureList.find((v)=>{
-      return v.name === name;
-    });
-  }
   choose(data:FigureStruct) {
-    this.tool.figure= data.name;
+    this.tool.figure= data.idx;
     this.tool.figureFill= false;
   }
   fill() {

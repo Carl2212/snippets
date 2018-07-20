@@ -3,7 +3,7 @@ export interface ColorStruct {
   color: string;
   value: string;
 }
-export let colorList : Array<ColorStruct>=
+export const colorList : Array<ColorStruct>=
 [
   {
     idx: 1,
@@ -66,3 +66,5 @@ export let colorList : Array<ColorStruct>=
     value: "#FFE4C4"
   }
 ]
+
+export const CHOSEDFIGURE = "#8A140E";

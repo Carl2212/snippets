@@ -4,7 +4,8 @@ tabs{
   ion-tabs.tabs .tabbar{
     background:#fff;
     border-top:0;
-    box-shadow: 0 -2px 40px -8px $shadow-color;
+    filter:drop-shadow(0 0 15px $shadow-color);
+    -webkit-filter: drop-shadow(0 0 15px $shadow-color);
     & >.tab-button{
       max-width: none;
     }
@@ -13,32 +14,33 @@ tabs{
       left:calc(50% - 40px);
       width: 80px;
       height: 80px;
-      top: -20px;
-      filter:drop-shadow(0 0 5px $shadow-color);
+      top: -30px;
       z-index:999;
       ion-icon{
         color:color($colors, primary);
         font-size: 25px;
         margin-bottom:15px;
       }
-      //皇冠
       &:before,&:after{
         position: absolute;
         left:5px;
         border-style: solid;
         content:"";
-        z-index:-1;
       }
       &:before {
         top: 10px;
         width:40px;
         border-color: transparent transparent $fingure-color transparent;
         border-width: 0 15px 20px 15px;
+        z-index:-1;
       }
       &:after {
         top: 30px;
         border-color: $fingure-color transparent transparent transparent;
         border-width: 35px 35px 0 35px;
+        z-index:-2;
+        filter:drop-shadow(0 0 5px $shadow-color);
+        -webkit-filter: drop-shadow(0 0 5px $shadow-color);
       }
     }
   }

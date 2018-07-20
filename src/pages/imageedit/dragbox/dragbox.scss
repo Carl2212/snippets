@@ -4,34 +4,57 @@ dragbox{
     z-index:100;
     top:0;
     left:0;
-    transform: translate(30px,30px);
-    border : 2px solid color($colors,dark);
+    box-shadow: 0 0 2px 0 color($colors,dark);
+    height: auto;
+    padding: 10px;
+    button{
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      margin: 0;
+      padding: 0;
+      &.left-top{
+        left: -10px;
+        top: -10px;
+      }
+      &.left-bottom{
+        left: -10px;
+        bottom: -10px;
+      }
+      &.right-top{
+        right: -10px;
+        top: -10px;
+      }
+      &.right-bottom{
+        right: -10px;
+        bottom: -10px;
+      }
+    }
     textarea{
       background: transparent;
       border: none;
+      width:100%;
+      padding: 0;
     }
     .point{
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      border: 1px color($colors,white);
-      background: color($colors,primary);
+      padding:10px;
       position: absolute;
+      &:after{
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        border: 1px color($colors,white);
+        background: color($colors,primary);
+        content:" ";
+        display: block;
+      }
       &.left{
-        left:-4px;
-        top:calc(50% - 3px);
+        left:-13px;
+        top:calc(50% - 13px);
       }
       &.right{
-        right:-4px;
-        top:calc(50% - 3px);
-      }
-      &.top{
-        left:calc(50% - 3px);
-        top:-4px;
-      }
-      &.bottom{
-        left:calc(50% - 3px);
-        bottom:-4px;
+        right:-13px;
+        top:calc(50% - 13px);
       }
     }
   }

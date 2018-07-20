@@ -1,24 +1,30 @@
 import { Component } from "@angular/core";
 import { ToolsService } from "./tools.service";
+import { toollist } from "../config/tool.list";
+import { DrawService } from "../canvas/drawService";
 @Component({
   selector : 'tools',
   templateUrl : 'tools.html'
 })
 export class Tools {
-  actions : Array<any> =[
-    {name : '涂鸦笔' , icon : 'brush' , action : 'draw'},
-    {name : '裁剪' , icon : 'crop' , action : 'cut'},
-    {name : '文字' , icon : 'logo-tumblr' , action : 'font'},
-    {name : '图形工具' , icon : 'photos-outline' , action : 'square'},
-    {name : '回退' , icon : 'undo' , action : 'undo'},
-  ];
+  public toollist: any = toollist;
+  public isShowSubTool : boolean;
   constructor(
-    private tool : ToolsService
+    private tool : ToolsService,
+    private dw: DrawService
   ){}
 
-  getAction(action: string) {
-    return this.actions.find(v=>{
-      return v.action == action;
-    });
+  toggleTools(l) {
+    this.isShowSubTool = true;
+    if(l.idx == 5) {
+      this.dw.canvasStack.pop();
+      this.dw.drawAll();
+    }else{
+      this.tool.action=l;
+      this.tool.reset();
+    }
+  }
+  closeAction() {
+    this.isShowSubTool = false;
   }
 }

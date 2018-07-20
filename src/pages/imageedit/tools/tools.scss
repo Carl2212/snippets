@@ -10,7 +10,7 @@ tools{
   .assistant-tools{
     position: absolute;
     width: 100%;
-    bottom : 0;
+    bottom : 100%;
     left : 0;
     z-index:999;
     background:color($colors,light);

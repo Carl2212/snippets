@@ -1,6 +1,7 @@
 import { Component, ViewChild, Renderer2 } from '@angular/core';
 import { Gesture, IonicPage } from 'ionic-angular';
-import { ToolsService } from "./tools/tools.service";
+import { CanvasService } from "./canvas/canvas.service";
+import { DrawService } from "./canvas/drawService";
 
 @IonicPage()
 @Component({
@@ -12,11 +13,10 @@ export class ImageEdit {
   @ViewChild('img') element;
   @ViewChild('imgParent') container;
   @ViewChild('cs') cs;
+  @ViewChild('content') content;
   gesture : Gesture;
 
   imageUrl : string = 'assets/imgs/demo.jpg';
-  iHeight : number;
-  iWidth : number;
 
   //调整大小 ： 这次 - 上次（距离） / 这次 / 上次 （放大缩小倍数）
   finalStateScale : number = 1;
@@ -34,7 +34,7 @@ export class ImageEdit {
 
   constructor(
     private render : Renderer2,
-    public tool : ToolsService
+    public dw : DrawService
   ) {
 
   }
@@ -43,8 +43,8 @@ export class ImageEdit {
     this.initGesture();
   }
   init() {
-    this.iHeight = this.element.nativeElement.height;
-    this.iWidth = this.element.nativeElement.width;
+    CanvasService.height = this.element.nativeElement.height;
+    CanvasService.width = this.element.nativeElement.width;
   }
   initGesture() {
     this.gesture = new Gesture(this.element.nativeElement);
@@ -87,7 +87,6 @@ export class ImageEdit {
     });
   }
   listenEdit(){
-    console.log('...........');
     this.isEdit = !this.isEdit;
     if(this.isEdit) {
       //重新 初始化图片大小

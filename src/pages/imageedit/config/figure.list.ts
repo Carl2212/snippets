@@ -2,39 +2,33 @@ export interface FigureStruct {
   idx: number;
   name: string;
   icon: string;
-  allowFill: boolean;
 }
 
 export let figureList: Array<FigureStruct>=
 [
   {
     idx: 1,
-    name: "square",
-    icon: "square-outline",
-    allowFill: true
+    name: "rect",
+    icon: "square-outline"
   },
   {
     idx: 2,
     name: "circle",
-    icon: "radio-button-off-outline",
-    allowFill: true
+    icon: "radio-button-off-outline"
   },
   {
     idx: 3,
     name: "arrow",
-    icon: "arrow-round-forward-outline",
-    allowFill: false
+    icon: "arrow-round-forward-outline"
   },
   {
     idx: 4,
     name: "heart",
-    icon: "heart-outline",
-    allowFill: true
+    icon: "heart-outline"
   },
   {
     idx: 5,
     name: "text",
-    icon: "text-outline",
-    allowFill: true
+    icon: "text-outline"
   }
 ]

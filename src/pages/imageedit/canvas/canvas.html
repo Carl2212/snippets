@@ -1,9 +1,9 @@
-<canvas #canvas class="canvas"></canvas>
-<dragbox #dragBox *ngIf="tool.action == 'font'" >
-  <textarea #textArea placeholder="请输入文字" [style.color]="tool.color" [style.font-size]="tool.font+'px'" [(ngModel)]="tool.text"></textarea>
-</dragbox>
-<!--<dragbox *ngIf="tool.action == 'figure'">-->
-  <!--<canvas #figure></canvas>-->
-<!--</dragbox>-->
-<div #pointLayer class="point-layer" tappable (tap)="pointerEvents()">
+<div #pointLayer class="point-layer" tappable>
+  <canvas #canvasBackground class="canvas"></canvas>
+  <canvas #canvasForeground class="canvas"></canvas>
+  <scrawl-comp *ngIf="tool.action?.idx == 1 "></scrawl-comp>
+  <figure-comp *ngIf="tool.action?.idx == 4 "></figure-comp>
+  <dragbox #dragBox *ngIf="tool.action?.idx == 3 ">
+    <div #textArea contenteditable="true" [style.color]="tool.color" [style.font-size]="tool.font+'px'" (blur)="tool.content=textArea.innerText"></div>
+  </dragbox>
 </div>
