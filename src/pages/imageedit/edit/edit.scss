@@ -1,0 +1,26 @@
+edit{
+  .main-tools{
+    position: absolute;
+    width: 100%;
+    bottom : 0;
+    left : 0;
+    z-index: 998;
+    box-shadow: 0 0 5px color($colors,dark);
+  }
+  .assistant-tools{
+    position: absolute;
+    width: 100%;
+    bottom : 100%;
+    left : 0;
+    z-index:999;
+    background:color($colors,light);
+    .color-palette{
+      ion-col{
+        min-height: 3px;
+      }
+      ion-icon:before{
+        text-shadow: 2px 0 color($colors,dark)
+      }
+    }
+  }
+}

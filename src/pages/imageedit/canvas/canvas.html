@@ -6,4 +6,5 @@
   <dragbox #dragBox *ngIf="tool.action?.idx == 3 ">
     <div #textArea contenteditable="true" [style.color]="tool.color" [style.font-size]="tool.font+'px'" (blur)="tool.content=textArea.innerText"></div>
   </dragbox>
+  <cropbox *ngIf="tool.action?.idx == 2 "></cropbox>
 </div>

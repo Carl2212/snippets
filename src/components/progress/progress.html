@@ -1,0 +1,36 @@
+<div [ngSwitch]="type">
+  <div *ngSwitchCase="'circle'">
+    <svg class="circle" [attr.width]="width" [attr.height]="width" [attr.viewbox]="viewbox">
+      <circle [attr.r]="radius" [attr.cx]="centrePoint?.x" [attr.cy]="centrePoint?.y" [attr.stroke]="bgColor" [attr.stroke-opacity]="bgOpacity" [attr.stroke-width]="strokeWidth"
+              fill="none"></circle>
+      <circle [attr.r]="radius" [attr.cx]="centrePoint?.x" [attr.cy]="centrePoint?.y" [attr.stroke]="color" [attr.stroke-opacity]="opacity" [attr.stroke-width]="strokeWidth" fill="none"
+              [attr.stroke-dasharray]="finish+' '+(perimeter - finish)" [attr.stroke-dashoffset]="perimeter/4" [attr.stroke-linecap]="linecap">
+      </circle>
+    </svg>
+  </div>
+  <div *ngSwitchCase="'circle-filled'">
+    <svg class="circle" [attr.width]="width" [attr.height]="width" [attr.viewbox]="viewbox">
+      <circle [attr.r]="radius" [attr.cx]="centrePoint?.x" [attr.cy]="centrePoint?.y" [attr.stroke]="bgColor" [attr.stroke-opacity]="bgOpacity" [attr.stroke-width]="strokeWidth" fill="none"></circle>
+      <circle [attr.r]="radius" [attr.cx]="centrePoint?.x" [attr.cy]="centrePoint?.y" [attr.stroke]="color" [attr.stroke-opacity]="opacity" [attr.stroke-width]="strokeWidth" fill="none"
+              [attr.stroke-dasharray]="finish+' '+(perimeter - finish)" [attr.stroke-dashoffset]="perimeter/4">
+      </circle>
+    </svg>
+  </div>
+  <div *ngSwitchCase="'react'" class="react">
+    <svg [attr.width]="width" [attr.height]="strokeWidth" [attr.viewbox]="viewbox">
+      <rect [attr.height]="strokeWidth" [attr.width]="width" [attr.x]="0" [attr.y]="0" rx="5" [attr.ry]="5" [attr.fill]="bgColor" [attr.fill-opacity]="bgOpacity"  [attr.stroke]="strokeColor"></rect>
+      <rect [attr.height]="strokeWidth" [attr.width]="finish" [attr.x]="0" [attr.y]="0" rx="5" [attr.ry]="5" [attr.fill]="color" [attr.fill-opacity]="opacity"
+            stroke="none"></rect>
+      <text [attr.x]="width / 2" [attr.y]="strokeWidth/2" dominant-baseline="middle" style="text-anchor: middle" [attr.fill]="fontColor">{{progress ? progress+'%' :
+        defaultTxt}}</text>
+    </svg>
+  </div>
+  <div *ngSwitchCase="'line'" class="line">
+    <svg [attr.width]="width" [attr.height]="height" [attr.viewbox]="viewbox">
+      <line [attr.x1]="startPoint?.x" [attr.y1]="startPoint?.y" [attr.x2]="endPoint?.x" [attr.y2]="endPoint?.y" fill="none" [attr.stroke-width]="strokeWidth"
+      [attr.stroke]="bgColor" [attr.stroke-opacity]="bgOpacity"  [attr.stroke-linecap]="linecap"></line>
+      <line [attr.x1]="startPoint?.x" [attr.y1]="startPoint?.y" [attr.x2]="endPoint?.x" [attr.y2]="endPoint?.y" fill="none" [attr.stroke-width]="strokeWidth" [attr.stroke]="color" [attr.stroke-opacity]="opacity"
+            [attr.stroke-dasharray]="finish+' '+(perimeter - finish)" stroke-dashoffset="startPoint?.x" [attr.stroke-linecap]="linecap"></line>
+    </svg>
+  </div>
+</div>

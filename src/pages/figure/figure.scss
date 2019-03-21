@@ -52,4 +52,23 @@ figure-demo {
       box-shadow: 1000px 1000px 0 0 rgba(55,55,55,.5) ,-1000px -1000px 0 0 rgba(55,55,55,.5) ;
     }
   }
+
+  .radio-checked{
+    position: relative;
+    padding:10px;
+  }
+  .radio-inner{
+    width: 10px;
+    height:16px;
+    border-width: 1px;
+    border-top-width:0;
+    border-left-width:0;
+    position: absolute;
+    top:0;
+    left:0;
+    border-style:solid;
+    border-color:#007ee6;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
 }

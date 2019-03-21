@@ -12,7 +12,7 @@ export const cropList : Array<CropStruct>=
       value: ""
     },
     {
-      idx: 1,
+      idx: 2,
       value: "1:1"
     },
     {

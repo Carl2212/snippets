@@ -1,0 +1,13 @@
+
+progress-comp{
+  svg{
+    position: relative;
+    transform: translateZ(0);
+    .number{
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+    }
+  }
+}

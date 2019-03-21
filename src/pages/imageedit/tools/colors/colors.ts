@@ -21,6 +21,6 @@ export class Colors {
 
   public colorList = colorList;
   constructor(
-    private tool : ToolsService
+    public tool : ToolsService
   ){}
 }

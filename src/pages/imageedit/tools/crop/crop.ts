@@ -7,7 +7,7 @@ import { ToolsService } from "../tools.service";
   template : `
     <ion-row>
       <ion-col no-padding *ngFor="let l of cropList">
-        <button ion-button no-margin clear full icon-only [class.outline]="l.idx == tool.crop" （click)=" tool.crop=l.idx ">
+        <button ion-button no-margin clear full icon-only [class.outline]="l.idx == tool.crop" (click)="toggle(l.idx)">
           <ion-icon color="dark" name="qr-scanner"></ion-icon>
           <span class="label">{{l.value}}</span>
         </button>
@@ -32,7 +32,13 @@ import { ToolsService } from "../tools.service";
 export class Crop {
   public cropList = cropList;
   constructor(
-    private tool: ToolsService
-  ){}
+    public tool: ToolsService
+  ){
+
+  }
+
+  toggle(id){
+    this.tool.crop=id;
+  }
 }
 

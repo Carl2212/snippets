@@ -38,5 +38,10 @@ export class Canvas {
     image.src = this.imageUrl;
     this.dw.cs= new CanvasService(this.renderer,this.canvasForeground);
   }
+
+  save() {
+    this.background.cs.drawImage(this.canvasForeground.nativeElement,0,0,CanvasService.width,CanvasService.height);
+    return this.background.toDataURL();
+  }
 }
 

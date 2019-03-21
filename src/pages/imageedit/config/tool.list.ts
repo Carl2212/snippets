@@ -9,6 +9,8 @@ export interface ToolStruct {
   parameter?: Array<string>;
 }
 
+export const ToolHeight = 200;
+
 export const toollist : Array<ToolStruct> = [
   {
     idx : 1,

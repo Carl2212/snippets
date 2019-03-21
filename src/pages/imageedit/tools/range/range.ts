@@ -22,6 +22,6 @@ export class Range {
   @Input() max: number;
 
   constructor(
-    private tool: ToolsService
+    public tool: ToolsService
   ){}
 }

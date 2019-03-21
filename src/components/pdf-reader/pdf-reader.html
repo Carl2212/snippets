@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar class="enable-env-top" color="primary" hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button clear icon-only navPop>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+  <div *ngIf="!totalPage">
+    <progress-comp type="line" strokeWidth="4" [width]="platform.width()" [progress]="progress" linecap="square"></progress-comp>
+  </div>
+  <div text-center padding margin-top *ngIf="!scale">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div class="viewContainer" #viewer *ngIf="url" [class.opacity0]="!scale" [scale]="scale">
+    <pdf-viewer [src]="normalizeURL(url)" style="display:block;"
+                [render-text]="false" [show-all]="false" [page]="page" [original-size]="true" [fit-to-page]="false"
+                (after-load-complete)="complete($event)" (swipeleft)="sickToPage(1)" (swiperight)="sickToPage(-1)"
+                (on-progress)="onProgress($event)"></pdf-viewer>
+  </div>
+  <div class="right-tip" ion-fixed *ngIf="totalPage">
+    <span>{{page}}/{{totalPage}}</span>
+  </div>
+</ion-content>

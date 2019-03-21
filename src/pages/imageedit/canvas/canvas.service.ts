@@ -1,8 +1,8 @@
-import { Injectable, Renderer2, ElementRef } from "@angular/core";
+
 import { lineStatus, textStatus, point, ActionStruct, FigureStatus } from "../tools/tools.service";
 import { CHOSEDFIGURE } from "../config/color.list";
 import { getRadius } from "../figure/figure";
-import { deg } from "../dragbox/dragbox";
+import { Renderer2, ElementRef } from "@angular/core";
 /**
  * Created by Ellen on 16/7/2018.
  *
@@ -11,6 +11,7 @@ import { deg } from "../dragbox/dragbox";
 export class CanvasService{
   public cs: any;
   private renderer: Renderer2;
+  private canvas: any;
   static width: number= 0;
   static height: number= 0;
   constructor(
@@ -18,8 +19,14 @@ export class CanvasService{
     canvas: ElementRef
   ) {
     this.renderer = renderer;
+    this.canvas = canvas;
     this.canvasInit(canvas);
   }
+
+  toDataURL() {
+    return this.canvas.nativeElement.toDataURL('image/jpeg');
+  }
+
   canvasInit(canvas: ElementRef) {
     this.cs = canvas.nativeElement.getContext('2d');
     this.renderer.setStyle(canvas.nativeElement,'width',`${CanvasService.width}px`);

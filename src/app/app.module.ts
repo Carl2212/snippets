@@ -9,6 +9,8 @@ import { HomePage } from '../pages/home/home';
 import { IonicStorageModule } from "@ionic/storage";
 import { TabsPage } from "../pages/tabs/tabs";
 import { FigureDemo } from "../pages/figure/figure";
+import { ComponentModule } from "../pages/imageedit/component.module";
+import { DirectivesModule } from "../directives/directives.module";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { FigureDemo } from "../pages/figure/figure";
       name : 'snippets',
       storeName: 'snippetsStorage',
       driverOrder: ['localstorage', 'indexeddb']
-    })
+    }),
+    ComponentModule,
+    DirectivesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

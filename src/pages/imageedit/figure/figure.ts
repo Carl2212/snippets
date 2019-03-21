@@ -1,11 +1,11 @@
 import { Component, ViewChild, Renderer2 } from "@angular/core";
 import { ToolsService, point } from "../tools/tools.service";
-import { Platform } from "ionic-angular";
 import { UIEventManager } from "ionic-angular/es2015/gestures/ui-event-manager";
 import { CanvasService } from "../canvas/canvas.service";
 import { CHOSEDFIGURE } from "../config/color.list";
 import { deepCopy } from "ionic-angular/es2015/util/util";
 import { DrawService } from "../canvas/drawService";
+import { Platform } from "ionic-angular";
 
 
 export function getRadius(point : point,point1 : point) {
@@ -31,15 +31,19 @@ export class FigureComp{
 
   dragPoint: point;
   canDrag: boolean;
+
+  plt : any;
   constructor(
     private tool: ToolsService,
     private dw: DrawService,
-    private plt: Platform,
-    private renderer: Renderer2
-  ){}
+    private renderer: Renderer2,
+    plt: Platform
+  ){
+    this.plt = plt;
+  }
 
   ngOnInit(){
-    this.figure = new CanvasService(this.renderer,this.canvasFigure);
+    this.figure = new CanvasService(this.renderer, this.canvasFigure);
     this.gestureEvent();
   }
   ngOnDestory() {

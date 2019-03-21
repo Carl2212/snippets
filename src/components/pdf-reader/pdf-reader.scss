@@ -1,0 +1,23 @@
+
+pdf-reader{
+  .viewContainer{
+    width:100%;
+    position: relative;
+  }
+  .right-tip{
+    position: absolute;
+    @include position(8px,8px,null,null);
+    width: 80px;
+    @include padding(5px ,null,5px,null);
+    background: rgba(100,100,100,.3);
+    border-radius: 5px;
+    text-align: center;
+    span{
+      color: color($colors,white);
+    }
+  }
+
+  .opacity0{
+    opacity:0;
+  }
+}

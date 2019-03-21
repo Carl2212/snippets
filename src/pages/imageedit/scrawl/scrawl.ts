@@ -18,12 +18,15 @@ export class scrawl{
   scrawl: any;
 
   point : point;
+  plt : any
   constructor(
     private tool: ToolsService,
     private dw: DrawService,
-    private plt: Platform,
-    private renderer: Renderer2
-  ){}
+    private renderer: Renderer2,
+    plt: Platform
+  ){
+    this.plt = plt;
+  }
 
   ngOnInit(){
     this.scrawl = new CanvasService(this.renderer,this.canvasScrawl);

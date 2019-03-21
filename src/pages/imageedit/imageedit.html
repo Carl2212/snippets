@@ -1,21 +1,23 @@
-<ion-header>
+<ion-header *ngIf="!scaleStatus">
   <ion-navbar>
     <ion-title>Canvas Image Edit</ion-title>
-    <ion-buttons end>
-      <button ion-button item-right clear icon-only (click)="listenEdit()">
-        <ion-icon [name]="isEdit? 'open-outline' : 'create-outline'"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content #content>
-  <div #imgParent class="imgParent" fixed>
-    <img #img [src]="imageUrl" *ngIf="!isEdit">
-    <canvas-comp #cs *ngIf="isEdit" [imageUrl]="imageUrl">
-    </canvas-comp>
+<ion-content #content >
+  <div #imgParent class="imgParent" ion-fixed>
+    <img #img [src]="imageUrl" [rotate]="rotateDeg"  scale (startScale)="scaleStatus = true" (endScale)="scaleStatus = false" *ngIf="!isEdit">
   </div>
-  <ion-footer *ngIf="isEdit">
-    <tools></tools>
-  </ion-footer>
 </ion-content>
+
+<ion-footer text-center *ngIf="!scaleStatus">
+  <button ion-button item-right clear icon-only>
+    <ion-icon name="download-outline"></ion-icon>
+  </button>
+  <button ion-button item-right clear icon-only (click)="rotate()">
+    <ion-icon name="refresh"></ion-icon>
+  </button>
+  <button ion-button item-right clear icon-only (click)="edit()">
+    <ion-icon name="create-outline"></ion-icon>
+  </button>
+</ion-footer>

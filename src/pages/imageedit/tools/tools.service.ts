@@ -96,6 +96,7 @@ export class ToolsService implements lineStatus , textStatus, FigureStatus, Crop
     this.boxTop = 200;
     this.boxWidth = 200;
     this.boxRotate = 0;
+    this.crop = 1;
   }
 
   getParameter() {
@@ -116,6 +117,5 @@ export class ToolsService implements lineStatus , textStatus, FigureStatus, Crop
       }
       this.dw.drawAll();
     }
-
   }
 }

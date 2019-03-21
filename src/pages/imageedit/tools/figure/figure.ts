@@ -30,7 +30,7 @@ export class Figure {
 
   public figureList = figureList;
   constructor(
-    private tool: ToolsService
+    public tool: ToolsService
   ){}
   choose(data:FigureStruct) {
     this.tool.figure= data.idx;

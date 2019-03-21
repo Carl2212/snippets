@@ -1,0 +1,23 @@
+<ion-header [class.tramsform]="isShowSubTool">
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button item-right clear icon-only (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button item-right clear icon-only (click)="save()">
+        <ion-icon name="open-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content #content >
+  <canvas-comp #cs *ngIf="canvasWillLoad" [imageUrl]="imageUrl">
+  </canvas-comp>
+</ion-content>
+
+<ion-footer text-center>
+  <tool></tool>
+</ion-footer>
